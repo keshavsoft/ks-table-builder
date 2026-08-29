@@ -15,10 +15,13 @@ export const renderTable = ({ inKsAttributes }) => {
         : (localKsAttributes.footer ? [localKsAttributes.footer] : []);
     const isSearch = Boolean(localKsAttributes.isSearch);
 
+    let dataStore = {};
+    dataStore.data = rows;
+
     const theadElement = createThead({ inHeaders: headers });
     const tbodyElement = createTbody({ inRows: rows, inHeaders: headers });
     const tfootElement = createTfoot({ inFooters: footers, inHeaders: headers });
-    const searchElement = createSearch({ inIsSearch: isSearch });
+    const searchElement = createSearch({ inIsSearch: isSearch, inDataStore: dataStore });
 
     const tableElement = createTable({
         inTheadElement: theadElement,

@@ -1,9 +1,12 @@
-const attachKeydownListener = ({ inElement }) => {
+const attachKeydownListener = ({ inElement, inKeydownFunc }) => {
     const localElement = inElement;
+    const localKeydownFunc = inKeydownFunc;
     if (!localElement) return;
 
     localElement.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.keyCode === 13) {
+        if (typeof localKeydownFunc === "function") {
+            localKeydownFunc(e);
+        } else if (e.key === "Enter" || e.keyCode === 13) {
             e.preventDefault();
             const focusableElements = Array.from(
                 document.querySelectorAll("input:not([disabled]), button:not([disabled]), select:not([disabled]), textarea:not([disabled])")
@@ -16,22 +19,26 @@ const attachKeydownListener = ({ inElement }) => {
     });
 };
 
-const attachKeypressListener = ({ inElement }) => {
+const attachKeypressListener = ({ inElement, inKeypressFunc }) => {
     const localElement = inElement;
+    const localKeypressFunc = inKeypressFunc;
     if (!localElement) return;
 
     localElement.addEventListener("keypress", (e) => {
-        console.log("aaaaaaaaaaaaa");
-
+        if (typeof localKeypressFunc === "function") {
+            localKeypressFunc(e);
+        }
     });
 };
 
-export const attachInputListener = ({ inElement }) => {
+export const attachInputListener = ({ inElement, inKeydownFunc, inKeypressFunc }) => {
     const localElement = inElement;
+    const localKeydownFunc = inKeydownFunc;
+    const localKeypressFunc = inKeypressFunc;
     if (!localElement) return;
 
-    attachKeydownListener({ inElement: localElement });
-    attachKeypressListener({ inElement: localElement });
+    attachKeydownListener({ inElement: localElement, inKeydownFunc: localKeydownFunc });
+    attachKeypressListener({ inElement: localElement, inKeypressFunc: localKeypressFunc });
 };
 
 export default attachInputListener;
