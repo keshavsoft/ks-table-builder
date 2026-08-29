@@ -40,16 +40,14 @@ export const createTable = ({
             : (Array.isArray(footersStore.footers) && footersStore.footers.length > 0))
     );
 
-    const visibleColumns = typeof columnsStore.getVisibleColumns === "function"
-        ? columnsStore.getVisibleColumns()
-        : (columnsStore.columns || columnsStore.headers || []);
-    const headersList = Array.isArray(columnsStore.headers) ? columnsStore.headers : [];
+    const theadElement = inTheadElement ?? (showHeader ? createThead({
+        inHeadersWithConfig: columnsStore.headersWithConfig
+    }) : null);
 
-    const theadElement = inTheadElement ?? (showHeader ? createThead({ inHeaders: headersList, inColumns: visibleColumns }) : null);
     const tbodyElement = inTbodyElement ?? (showBody ? createTbody({
-        inRows: dataStore.data,
         inDataWithConfig: dataStore.dataWithConfig
     }) : null);
+
     const tfootElement = inTfootElement ?? (showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: headersList }) : null);
 
     return domElementBuilder({

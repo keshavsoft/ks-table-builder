@@ -3,6 +3,7 @@ import { getVisibleColumns } from "./getVisibleColumns.js";
 import { getHeaders } from "./getHeaders.js";
 import { getColumn } from "./getColumn.js";
 import { setColumnVisibility } from "./setColumnVisibility.js";
+import { createHeadersWithConfig } from "./createHeadersWithConfig.js";
 
 export const createColumnsStore = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
@@ -21,6 +22,9 @@ export const createColumnsStore = ({ inKsAttributes }) => {
         columns: columns,
         get headers() {
             return getHeaders({ inColumns: columns });
+        },
+        get headersWithConfig() {
+            return createHeadersWithConfig({ inColumns: getVisibleColumns({ inColumns: columns }) });
         },
         getVisibleColumns: () => getVisibleColumns({ inColumns: columns }),
         getColumn: ({ inKey }) => getColumn({ inColumns: columns, inKey: inKey }),
