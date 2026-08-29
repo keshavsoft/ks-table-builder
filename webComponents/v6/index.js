@@ -74,7 +74,7 @@ class KsWrapperForm extends HTMLElement {
 registerComponent({
     inComponentClass: KsTableCellContent,
     inTagName: "ks-cell-base",
-    inVersion: "v21",
+    inVersion: "v6",
     inNamespaceKey: "classes"
 });
 

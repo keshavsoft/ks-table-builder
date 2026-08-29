@@ -1,9 +1,11 @@
 import domElementBuilder from "../../../../domCreation/v2/index.js";
 import createThead from "./thead.js";
-import createTbody from "./tbody.js";
+// import createTbody from "./tbody.js";
 import createTfoot from "./tfoot/v2/index.js";
 import createSearch from "./search/v2/index.js";
 import createTable from "./table.js";
+
+import createTbody from "./tbody/v1/create.js";
 
 export const renderTable = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
