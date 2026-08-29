@@ -16,12 +16,18 @@ export const renderTable = ({ inKsAttributes }) => {
     const isSearch = Boolean(localKsAttributes.isSearch);
 
     let dataStore = {};
+    dataStore.originalData = rows;
     dataStore.data = rows;
 
     const theadElement = createThead({ inHeaders: headers });
     const tbodyElement = createTbody({ inRows: rows, inHeaders: headers });
     const tfootElement = createTfoot({ inFooters: footers, inHeaders: headers });
-    const searchElement = createSearch({ inIsSearch: isSearch, inDataStore: dataStore });
+    const searchElement = createSearch({
+        inIsSearch: isSearch,
+        inDataStore: dataStore,
+        inTbodyElement: tbodyElement,
+        inHeaders: headers
+    });
 
     const tableElement = createTable({
         inTheadElement: theadElement,
