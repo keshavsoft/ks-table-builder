@@ -10,6 +10,7 @@ fetch("./StockItems.json")
 
         table.config = {
             isSearch: true,
+            showFooter: false,
             headers: ["StockItemName", "StockParentName", "StockCategory", "StockBaseUnits", "Uom"],
             rows: sampleRows,
             footers: [

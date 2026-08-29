@@ -12,12 +12,22 @@ export const buildElements = ({ inKsAttributes, inTableStore }) => {
     const columnsStore = localTableStore.columns || {};
     const footersStore = localTableStore.footers || {};
 
-    const theadElement = createThead({ inHeaders: columnsStore.headers });
-    const tbodyElement = createTbody({ inRows: dataStore.data, inHeaders: columnsStore.headers });
-    const tfootElement = createTfoot({ inFooters: footersStore.footers, inHeaders: columnsStore.headers });
+    // Optional element flags (supports showHeader/isHeader, showBody/isBody, etc.)
+    const showHeader = Boolean(localKsAttributes.showHeader ?? localKsAttributes.isHeader ?? true);
+    const showBody = Boolean(localKsAttributes.showBody ?? localKsAttributes.isBody ?? true);
+    const showFooter = Boolean(
+        localKsAttributes.showFooter ??
+        localKsAttributes.isFooter ??
+        (Array.isArray(footersStore.footers) && footersStore.footers.length > 0)
+    );
+    const showSearch = Boolean(localKsAttributes.showSearch ?? localKsAttributes.isSearch ?? false);
+
+    const theadElement = showHeader ? createThead({ inHeaders: columnsStore.headers }) : null;
+    const tbodyElement = showBody ? createTbody({ inRows: dataStore.data, inHeaders: columnsStore.headers }) : null;
+    const tfootElement = showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: columnsStore.headers }) : null;
 
     const searchElement = createSearch({
-        inIsSearch: Boolean(localKsAttributes.isSearch),
+        inIsSearch: showSearch,
         inDataStore: dataStore,
         inTbodyElement: tbodyElement,
         inHeaders: columnsStore.headers
