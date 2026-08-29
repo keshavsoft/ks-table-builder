@@ -43,8 +43,12 @@ export const createTable = ({
         inObjectConfig: columnsStore.headersWithConfig
     }) : null);
 
+    const headersList = Array.isArray(columnsStore.headers) ? columnsStore.headers : [];
+
     const tbodyElement = inTbodyElement ?? (showBody ? createThead({
-        inObjectConfig: dataStore.dataWithConfig
+        inObjectConfig: typeof dataStore.getDataWithConfig === "function"
+            ? dataStore.getDataWithConfig({ inHeaders: headersList })
+            : dataStore.dataWithConfig
     }) : null);
 
     const tfootElement = inTfootElement ?? (showHeader ? createThead({

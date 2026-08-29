@@ -16,8 +16,16 @@ export const createDataStore = ({ inKsAttributes }) => {
 
     return {
         originalData: originalData,
+        getDataWithConfig: ({ inHeaders }) => {
+            return createBodyWithConfig({
+                inRows: showSerial ? currentUiData : activeData,
+                inHeaders: inHeaders
+            });
+        },
         get dataWithConfig() {
-            return createBodyWithConfig({ inRows: showSerial ? currentUiData : activeData });
+            return createBodyWithConfig({
+                inRows: showSerial ? currentUiData : activeData
+            });
         },
         get data() {
             return showSerial ? currentUiData : activeData;
