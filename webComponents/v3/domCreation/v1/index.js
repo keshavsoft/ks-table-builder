@@ -40,7 +40,7 @@ const startFunc = ({ inSpec, inControlType, inThemeName, inClassList }) => {
     // 6. Append Child DOM Elements (for container / wrapper nodes)
     if (Array.isArray(localSpec.children)) {
         localSpec.children.forEach(child => {
-            if (child instanceof HTMLElement) {
+            if (child instanceof Node) {
                 element.appendChild(child);
             }
         });
