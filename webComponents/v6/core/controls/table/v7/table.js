@@ -1,6 +1,5 @@
 import domElementBuilder from "../../../../domCreation/v2/index.js";
 import createThead from "./thead/v2/index.js";
-import createTbody from "./tbody/v2/create.js";
 import createTfoot from "./tfoot/v2/index.js";
 
 export const createTable = ({
@@ -48,7 +47,13 @@ export const createTable = ({
         inObjectConfig: dataStore.dataWithConfig
     }) : null);
 
-    const tfootElement = inTfootElement ?? (showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: headersList }) : null);
+    const tfootElement = inTfootElement ?? (showHeader ? createThead({
+        inObjectConfig: columnsStore.headersWithConfig
+    }) : null);
+
+    // const tfootElement1 = inTfootElement ?? (showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: headersList }) : null);
+
+    // const tfootElement = inTfootElement ?? (showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: headersList }) : null);
 
     return domElementBuilder({
         inSpec: {

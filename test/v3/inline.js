@@ -30,7 +30,7 @@ ksTable1.config = {
                 controlType: "input",
                 placeholder: "Enter Parent Name",
                 theme: "default-better-focus",
-                isVisible: false
+                isVisible: true
             },
             Uom: {
                 controlType: "input",
