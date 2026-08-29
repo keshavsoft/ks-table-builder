@@ -6,9 +6,11 @@ export const createTableStore = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
 
     const footersStore = createFootersStore({ inKsAttributes: localKsAttributes });
+    const dataStore = createDataStore({ inKsAttributes: localKsAttributes });
+    // console.log("dataStore : ", dataStore);
 
     return {
-        data: createDataStore({ inKsAttributes: localKsAttributes }),
+        data: dataStore,
         columns: createColumnsStore({ inKsAttributes: localKsAttributes }),
         footers: footersStore,
         isSearch: Boolean(localKsAttributes.isSearch ?? localKsAttributes.showSearch ?? false),

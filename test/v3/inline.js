@@ -3,12 +3,12 @@ const inLineDivId = document.getElementById("inLineDivId");
 fetch("./StockItems.json")
     .then(res => res.json())
     .then(stockData => {
-        const table = document.createElement("ks-table-base");
+        ksTable1 = document.createElement("ks-table-base");
 
         // Display sample stock items in rows
         const sampleRows = stockData.slice(0, 105);
 
-        table.config = {
+        ksTable1.config = {
             showSerial: true,
             isSearch: false,
             showHeader: true,
@@ -79,7 +79,7 @@ fetch("./StockItems.json")
             ]
         };
 
-        inLineDivId.appendChild(table);
+        inLineDivId.appendChild(ksTable1);
     })
     .catch(err => {
         console.error("Error loading StockItems.json:", err);
