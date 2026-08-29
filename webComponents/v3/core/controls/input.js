@@ -10,10 +10,16 @@ const COMMON_ATTRIBUTES = {
     "title": "title"
 };
 
-const BUTTON_ATTRIBUTES = {
-    "form": "form",
-    "type": "type",
-    "value": "value"
+const INPUT_ATTRIBUTES = {
+    "autocomplete": "autocomplete",
+    "list": "list",
+    "max": "max",
+    "max-length": "maxlength",
+    "min": "min",
+    "min-length": "minlength",
+    "pattern": "pattern",
+    "size": "size",
+    "step": "step"
 };
 
 const getCommonAttributes = ({ inKsAttributes }) => {
@@ -35,11 +41,11 @@ const getCommonAttributes = ({ inKsAttributes }) => {
     return localResult;
 };
 
-const getButtonAttributes = ({ inKsAttributes }) => {
+const getInputAttributes = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
     const localResult = {};
 
-    for (const [ksKey, attrName] of Object.entries(BUTTON_ATTRIBUTES)) {
+    for (const [ksKey, attrName] of Object.entries(INPUT_ATTRIBUTES)) {
         const val = localKsAttributes[ksKey] ?? localKsAttributes[attrName];
         if (val !== undefined && val !== "") {
             localResult[attrName] = val;
@@ -53,29 +59,43 @@ const getEvents = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
     const localEvents = {};
 
-    localEvents["click"] = (event) => {
-        console.log("Button clicked event : ", event);
-    };
+    const rawVal = localKsAttributes?.["enter-as-tab"] ?? localKsAttributes?.enterAsTab ?? localKsAttributes?.["ks-enter-as-tab"];
+    const isEnterAsTab = rawVal === "true" || rawVal === true;
+
+    if (isEnterAsTab) {
+        localEvents["keydown"] = (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                const inputs = Array.from(document.querySelectorAll("input"));
+                const currentIndex = inputs.indexOf(event.currentTarget);
+
+                if (currentIndex !== -1 && currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                }
+            }
+        };
+    }
 
     return localEvents;
 };
 
-export const renderButton = ({ inKsAttributes } = {}) => {
+const renderInput = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
 
     const localCommonAttrs = getCommonAttributes({ inKsAttributes: localKsAttributes });
-    const localButtonAttrs = getButtonAttributes({ inKsAttributes: localKsAttributes });
+    const localInputAttrs = getInputAttributes({ inKsAttributes: localKsAttributes });
     const localEvents = getEvents({ inKsAttributes: localKsAttributes });
 
     return {
-        tagName: "button",
-        textContent: localKsAttributes["text"] || localKsAttributes["labelText"] || "",
+        tagName: "input",
         properties: {
-            disabled: localKsAttributes["disabled"] === true || localKsAttributes["disabled"] === "true"
+            type: localKsAttributes["type"] || localKsAttributes["inputType"] || "text",
+            value: localKsAttributes["value"] || "",
+            placeholder: localKsAttributes["place-holder"] || localKsAttributes["placeholder"] || localKsAttributes["inputPlaceholder"] || ""
         },
-        attributes: { ...localCommonAttrs, ...localButtonAttrs },
+        attributes: { ...localCommonAttrs, ...localInputAttrs },
         events: localEvents
     };
 };
 
-export default renderButton;
+export default renderInput;
