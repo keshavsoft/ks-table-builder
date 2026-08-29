@@ -41,10 +41,14 @@ export const createTable = ({
     );
 
     const theadElement = inTheadElement ?? (showHeader ? createThead({
-        inHeadersWithConfig: columnsStore.headersWithConfig
+        inObjectConfig: columnsStore.headersWithConfig
     }) : null);
 
     const tbodyElement = inTbodyElement ?? (showBody ? createTbody({
+        inDataWithConfig: dataStore.dataWithConfig
+    }) : null);
+
+    const tbodyElement1 = inTbodyElement ?? (showBody ? createTbody({
         inDataWithConfig: dataStore.dataWithConfig
     }) : null);
 

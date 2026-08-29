@@ -1,8 +1,8 @@
 import buildSpecElement from "../../../../../../domCreation/v2/buildSpecElement.js";
 
-export const createThead = ({ inHeadersWithConfig }) => {
-    if (inHeadersWithConfig) {
-        return buildSpecElement(inHeadersWithConfig);
+export const createThead = ({ inObjectConfig }) => {
+    if (inObjectConfig) {
+        return buildSpecElement(inObjectConfig);
     };
 };
 
