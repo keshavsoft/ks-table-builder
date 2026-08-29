@@ -47,4 +47,4 @@ fetch("./StockItems.json")
     })
     .catch(err => {
         console.error("Error loading StockItems.json:", err);
-    });
+    });
