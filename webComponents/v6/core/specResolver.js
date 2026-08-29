@@ -1,5 +1,5 @@
 import renderInput from "./controls/input.js";
-import renderTable from "./controls/table/v3/index.js";
+import renderTable from "./controls/table/v4/index.js";
 
 import domElementBuilder from "../domCreation/v2/index.js";
 import themes from "./themes.json" with { type: "json" };
