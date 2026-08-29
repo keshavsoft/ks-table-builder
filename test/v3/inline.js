@@ -9,6 +9,7 @@ fetch("./StockItems.json")
         const sampleRows = stockData.slice(0, 105);
 
         table.config = {
+            showSerial: false,
             isSearch: false,
             showHeader: true,
             showBody: true,
