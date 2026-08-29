@@ -6,7 +6,7 @@ fetch("./StockItems.json")
         const table = document.createElement("ks-table-base");
 
         // Display sample stock items in rows
-        const sampleRows = stockData.slice(0, 5);
+        const sampleRows = stockData.slice(0, 105);
 
         table.config = {
             isSearch: true,
