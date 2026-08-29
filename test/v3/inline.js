@@ -9,10 +9,43 @@ fetch("./StockItems.json")
         const sampleRows = stockData.slice(0, 105);
 
         table.config = {
-            isSearch: true,
+            isSearch: false,
+            showHeader: true,
+            showBody: true,
             showFooter: false,
             headers: ["StockItemName", "StockParentName", "StockCategory", "StockBaseUnits", "Uom"],
             rows: sampleRows,
+            columns: [
+                {
+                    StockItemName: {
+                        controlType: "input",
+                        placeholder: "Enter Item Name",
+                        theme: "default-better-focus"
+                    },
+                    StockParentName: {
+                        controlType: "input",
+                        placeholder: "Enter Parent Name",
+                        theme: "default-better-focus",
+                        isVisible: false
+                    },
+                    StockCategory: {
+                        controlType: "input",
+                        placeholder: "Enter Category",
+                        theme: "default-better-focus"
+                    },
+                    StockBaseUnits: {
+                        controlType: "input",
+                        placeholder: "Enter Base Units",
+                        theme: "default-better-focus"
+                    },
+                    Uom: {
+                        controlType: "input",
+                        placeholder: "Enter UOM",
+                        theme: "default-better-focus",
+                        "ks-enter-as-tab": true
+                    }
+                }
+            ],
             footers: [
                 {
                     StockItemName: {
