@@ -1,4 +1,4 @@
-import createDataStore from "./dataStore.js";
+import createDataStore from "./dataStore/index.js";
 import createColumnsStore from "./columnsStore/index.js";
 import createFootersStore from "./footersStore.js";
 

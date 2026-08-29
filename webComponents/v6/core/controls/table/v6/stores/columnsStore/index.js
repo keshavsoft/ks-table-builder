@@ -1,4 +1,8 @@
 import { buildColumnsMap } from "./buildColumnsMap.js";
+import { getVisibleColumns } from "./getVisibleColumns.js";
+import { getHeaders } from "./getHeaders.js";
+import { getColumn } from "./getColumn.js";
+import { setColumnVisibility } from "./setColumnVisibility.js";
 
 export const createColumnsStore = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
@@ -13,28 +17,16 @@ export const createColumnsStore = ({ inKsAttributes }) => {
         inShowSerial: showSerial
     });
 
-    const getVisibleColumns = () => columns.filter(col => col.isVisible);
-    const getHeaders = () => getVisibleColumns().map(col => col.key);
-
     return {
         columns: columns,
         get headers() {
-            return getHeaders();
+            return getHeaders({ inColumns: columns });
         },
-        getVisibleColumns: getVisibleColumns,
-        getColumn: ({ inKey }) => {
-            const localKey = inKey;
-            return columns.find(col => col.key === localKey) || null;
-        },
-        setColumnVisibility: ({ inKey, inIsVisible }) => {
-            const localKey = inKey;
-            const localIsVisible = Boolean(inIsVisible);
-            const targetCol = columns.find(col => col.key === localKey);
-            if (targetCol) {
-                targetCol.isVisible = localIsVisible;
-            }
-        }
+        getVisibleColumns: () => getVisibleColumns({ inColumns: columns }),
+        getColumn: ({ inKey }) => getColumn({ inColumns: columns, inKey: inKey }),
+        setColumnVisibility: ({ inKey, inIsVisible }) => setColumnVisibility({ inColumns: columns, inKey: inKey, inIsVisible: inIsVisible })
     };
 };
 
 export default createColumnsStore;
+
