@@ -1,4 +1,4 @@
-import domElementBuilder from "../../../../domCreation/v2/index.js";
+import domElementBuilder from "../../../../../../domCreation/v2/index.js";
 
 export const createSearch = ({ inIsSearch }) => {
     const localIsSearch = Boolean(inIsSearch);

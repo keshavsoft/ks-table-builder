@@ -2,11 +2,11 @@ import domElementBuilder from "../../../../domCreation/v2/index.js";
 import createThead from "./thead.js";
 import createTbody from "./tbody.js";
 import createTfoot from "./tfoot/v2/index.js";
-import createSearch from "./search.js";
+import createSearch from "./search/v2/index.js";
+import createTable from "./table.js";
 
 export const renderTable = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
-    console.log("localKsAttributes L ", localKsAttributes);
 
     const headers = Array.isArray(localKsAttributes.headers) ? localKsAttributes.headers : [];
     const rows = Array.isArray(localKsAttributes.rows) ? localKsAttributes.rows : [];
@@ -20,14 +20,10 @@ export const renderTable = ({ inKsAttributes }) => {
     const tfootElement = createTfoot({ inFooters: footers, inHeaders: headers });
     const searchElement = createSearch({ inIsSearch: isSearch });
 
-    const tableElement = domElementBuilder({
-        inSpec: {
-            tagName: "table",
-            children: [theadElement, tbodyElement, tfootElement].filter(Boolean),
-            attributes: {
-                class: "w-full border-collapse border border-gray-300 my-4"
-            }
-        }
+    const tableElement = createTable({
+        inTheadElement: theadElement,
+        inTbodyElement: tbodyElement,
+        inTfootElement: tfootElement
     });
 
     if (!searchElement) {
