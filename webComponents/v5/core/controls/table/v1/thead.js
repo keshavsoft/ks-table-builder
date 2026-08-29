@@ -1,4 +1,4 @@
-import domElementBuilder from "../../../domCreation/v2/index.js";
+import domElementBuilder from "../../../../domCreation/v2/index.js";
 
 export const createThead = ({ inHeaders }) => {
     const localHeaders = Array.isArray(inHeaders) ? inHeaders : [];

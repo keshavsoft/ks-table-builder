@@ -1,4 +1,4 @@
-import domElementBuilder from "../../../../../domCreation/v2/index.js";
+import domElementBuilder from "../../../../../../domCreation/v2/index.js";
 import createTd from "./td.js";
 
 export const createTr = ({ inFooterRowConfig, inHeaders }) => {

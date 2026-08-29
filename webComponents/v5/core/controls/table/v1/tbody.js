@@ -1,5 +1,5 @@
-import resolveSpec from "../../specResolver.js";
-import domElementBuilder from "../../../domCreation/v2/index.js";
+import resolveSpec from "../../../specResolver.js";
+import domElementBuilder from "../../../../domCreation/v2/index.js";
 
 export const createTbody = ({ inRows, inHeaders }) => {
     const localRows = Array.isArray(inRows) ? inRows : [];

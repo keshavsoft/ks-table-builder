@@ -1,4 +1,4 @@
-import domElementBuilder from "../../../domCreation/v2/index.js";
+import domElementBuilder from "../../../../domCreation/v2/index.js";
 import createThead from "./thead.js";
 import createTbody from "./tbody.js";
 import createTfoot from "./tfoot/v2/index.js";
