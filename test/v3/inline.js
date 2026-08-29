@@ -9,6 +9,7 @@ fetch("./StockItems.json")
         const sampleRows = stockData.slice(0, 5);
 
         table.config = {
+            isSearch: true,
             headers: ["StockItemName", "StockParentName", "StockCategory", "StockBaseUnits", "Uom"],
             rows: sampleRows,
             footers: [
