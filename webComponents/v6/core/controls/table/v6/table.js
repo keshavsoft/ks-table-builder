@@ -1,5 +1,5 @@
 import domElementBuilder from "../../../../domCreation/v2/index.js";
-import createThead from "./thead/v1/index.js";
+import createThead from "./thead/v2/index.js";
 import createTbody from "./tbody/v2/create.js";
 import createTfoot from "./tfoot/v2/index.js";
 
@@ -46,7 +46,10 @@ export const createTable = ({
     const headersList = Array.isArray(columnsStore.headers) ? columnsStore.headers : [];
 
     const theadElement = inTheadElement ?? (showHeader ? createThead({ inHeaders: headersList, inColumns: visibleColumns }) : null);
-    const tbodyElement = inTbodyElement ?? (showBody ? createTbody({ inRows: dataStore.data, inHeaders: headersList }) : null);
+    const tbodyElement = inTbodyElement ?? (showBody ? createTbody({
+        inRows: dataStore.data,
+        inDataWithConfig: dataStore.dataWithConfig
+    }) : null);
     const tfootElement = inTfootElement ?? (showFooter ? createTfoot({ inFooters: footersStore.footers, inHeaders: headersList }) : null);
 
     return domElementBuilder({
