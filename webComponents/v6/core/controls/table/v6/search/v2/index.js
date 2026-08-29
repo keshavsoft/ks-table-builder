@@ -1,5 +1,6 @@
 import domElementBuilder from "../../../../../../domCreation/v2/index.js";
-import createTbody from "../../tbody.js";
+import refreshBody from "../../tbody/v2/refresh.js";
+// import createTbody from "../../tbody.js";
 
 export const createSearch = ({ inIsSearch, inDataStore, inTbodyElement, inHeaders }) => {
     const localIsSearch = Boolean(inIsSearch);
@@ -28,9 +29,10 @@ export const createSearch = ({ inIsSearch, inDataStore, inTbodyElement, inHeader
         }
 
         if (localTbodyElement && typeof localTbodyElement.replaceWith === "function") {
-            const newTbodyElement = createTbody({
+            const newTbodyElement = refreshBody({
                 inRows: localDataStore.data,
-                inHeaders: localHeaders
+                inHeaders: localHeaders,
+                inDataStore: localDataStore
             });
             localTbodyElement.replaceWith(newTbodyElement);
             localTbodyElement = newTbodyElement;

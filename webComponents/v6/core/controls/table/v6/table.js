@@ -1,6 +1,6 @@
 import domElementBuilder from "../../../../domCreation/v2/index.js";
-import createThead from "./thead.js";
-import createTbody from "./tbody/v1/create.js";
+import createThead from "./thead/v1/index.js";
+import createTbody from "./tbody/v2/create.js";
 import createTfoot from "./tfoot/v2/index.js";
 
 export const createTable = ({

@@ -10,7 +10,7 @@ fetch("./StockItems.json")
 
         ksTable1.config = {
             showSerial: true,
-            isSearch: false,
+            isSearch: true,
             showHeader: true,
             showBody: true,
             showFooter: false,
