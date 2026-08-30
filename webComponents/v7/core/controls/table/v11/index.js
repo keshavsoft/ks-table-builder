@@ -11,14 +11,22 @@ import hydrateTableData from "./userUI/hydrateTableData.js";
  * Layer 2: Skeleton Event Hooking (`bindSkeletonEvents` -> Search & Row Click)
  * Layer 3: Data Transformation (`prepareTableData`), Slot Mounting (`renderUserUI`), and Hydration (`hydrateTableData`)
  */
-export const renderTable = ({ inSpec, inRows, inOnRowClick, inOnSearch }) => {
+export const renderTable = ({ inSpec, inTheme, inThemeName, inThemeSpec, inRows, inOnRowClick, inOnSearch }) => {
     const localSpec = inSpec;
+    const localTheme = inTheme;
+    const localThemeName = inThemeName;
+    const localThemeSpec = inThemeSpec;
     let localRows = inRows || [];
     const localOnRowClick = inOnRowClick;
     const localOnSearch = inOnSearch;
 
     // Layer 1: Build Layout Skeleton DOM Shell (Toolbar + <thead> + empty tbody slot)
-    const skeletonElement = renderSkeleton({ inSpec: localSpec });
+    const skeletonElement = renderSkeleton({
+        inSpec: localSpec,
+        inTheme: localTheme,
+        inThemeName: localThemeName,
+        inThemeSpec: localThemeSpec
+    });
 
     // Internal Search Handler: Filters rows & refreshes tbody slot in-place!
     const handleSearch = ({ inQuery, inEvent }) => {

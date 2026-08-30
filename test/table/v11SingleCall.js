@@ -3,8 +3,9 @@ import { renderTable } from "../../webComponents/v7/core/controls/table/v11/inde
 const tableContainer = document.getElementById("tableContainer");
 
 if (tableContainer) {
+    const stockRows = [];
     // Raw stock data (NO serialNo column provided!)
-    const stockRows = [
+    const stockRows1 = [
         { StockItemName: "0.09/30mm", StockParentName: "FISH KNITTED FABRIC", Uom: "kgs" },
         { StockItemName: "0.11-25", StockParentName: "FISH KNITTED FABRIC", Uom: "kgs" },
         { StockItemName: "0.11-30", StockParentName: "FISH KNITTED FABRIC", Uom: "kgs" },
@@ -21,6 +22,7 @@ if (tableContainer) {
 
     // Table v11 Render (Includes Search Toolbar + Data Mapper Layer)
     const tableElement = renderTable({
+        inTheme: "dark", // Options: "extra-dark" | "dark" | "medium" | "light" | "extra-light"
         inRows: stockRows,
         inOnRowClick: handleRowClick
     });
