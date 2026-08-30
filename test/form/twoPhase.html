@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Controls - Flavor 2: 2-Phase Async Mount</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8 bg-gray-50 flex flex-col justify-center items-center min-h-screen">
+    <div class="mb-4 text-center">
+        <h1 class="text-xl font-bold text-gray-800">Form Controls — Flavor 2: 2-Phase Async Mount (`renderSkeleton` + `renderUserUI`)</h1>
+        <p class="text-sm text-gray-500">Skeleton mounted first, User Controls & Data injected asynchronously into page DOM later</p>
+        <a href="./index.html" class="inline-block mt-2 text-xs text-blue-600 hover:underline">← Back to Form Index</a>
+    </div>
+
+    <div id="formContainer" class="w-full max-w-md">
+        <!-- Rendered by twoPhase.js -->
+    </div>
+
+    <script type="module" src="./twoPhase.js"></script>
+</body>
+
+</html>
