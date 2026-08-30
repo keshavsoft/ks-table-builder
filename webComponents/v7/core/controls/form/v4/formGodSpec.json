@@ -1,0 +1,113 @@
+{
+  "tagName": "form",
+  "attributes": {
+    "class": "max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4 border border-gray-200"
+  },
+  "children": [
+    {
+      "tagName": "div",
+      "attributes": {
+        "class": "form-header pb-3 border-b border-gray-200"
+      },
+      "children": [
+        {
+          "tagName": "h2",
+          "attributes": {
+            "class": "text-lg font-bold text-gray-800"
+          },
+          "textContent": "This is Head v3"
+        }
+      ]
+    },
+    {
+      "tagName": "div",
+      "attributes": {
+        "class": "form-body py-3 space-y-4"
+      },
+      "children": [
+        {
+          "tagName": "p",
+          "attributes": {
+            "class": "text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2"
+          },
+          "textContent": "This is Body"
+        },
+        {
+          "tagName": "div",
+          "attributes": {
+            "class": "form-group flex flex-col space-y-1"
+          },
+          "children": [
+            {
+              "tagName": "label",
+              "attributes": {
+                "class": "block text-sm font-medium text-gray-700",
+                "for": "username"
+              },
+              "textContent": "Username"
+            },
+            {
+              "tagName": "input",
+              "attributes": {
+                "type": "text",
+                "id": "username",
+                "name": "username",
+                "placeholder": "Enter username",
+                "class": "border border-gray-300 bg-white rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              }
+            }
+          ]
+        },
+        {
+          "tagName": "div",
+          "attributes": {
+            "class": "form-group flex flex-col space-y-1"
+          },
+          "children": [
+            {
+              "tagName": "label",
+              "attributes": {
+                "class": "block text-sm font-medium text-gray-700",
+                "for": "email"
+              },
+              "textContent": "Email Address"
+            },
+            {
+              "tagName": "input",
+              "attributes": {
+                "type": "email",
+                "id": "email",
+                "name": "email",
+                "placeholder": "name@example.com",
+                "class": "border border-gray-300 bg-white rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tagName": "div",
+      "attributes": {
+        "class": "form-footer pt-3 border-t border-gray-200 space-y-2"
+      },
+      "children": [
+        {
+          "tagName": "p",
+          "attributes": {
+            "class": "text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1"
+          },
+          "textContent": "This is Footer"
+        },
+        {
+          "tagName": "button",
+          "attributes": {
+            "type": "submit",
+            "class": "w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
+          },
+          "textContent": "Submit Form"
+        }
+      ]
+    }
+  ]
+}
