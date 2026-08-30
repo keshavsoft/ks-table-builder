@@ -3,33 +3,49 @@ import buildUserRowSpec from "./buildUserRowSpec.js";
 
 /**
  * Layer 3: User UI Render
- * Generates user-defined input controls from field configurations and mounts them into the body slot of the skeleton DOM.
+ * Supports dual-flavor execution:
+ *   Flavor A (In-Memory Node): inSkeletonElement passed as DOM node.
+ *   Flavor B (Global Document DOM): inTarget passed as CSS selector string or document query fallback.
  */
-export const renderUserUI = ({ inSkeletonElement, inFields }) => {
+export const renderUserUI = ({ inSkeletonElement, inTarget, inFields }) => {
     const localSkeletonElement = inSkeletonElement;
+    const localTarget = inTarget;
     const localFields = inFields || [];
 
-    if (!localSkeletonElement) return null;
+    // 1. Resolve Target Container:
+    let targetElem = null;
 
-    // 1. Locate the body slot container in the skeleton DOM
-    const bodySlotElem = localSkeletonElement.querySelector('[slot="body"]')
-        || localSkeletonElement.querySelector('.form-body')
-        || localSkeletonElement;
+    if (localSkeletonElement instanceof Node) {
+        targetElem = localSkeletonElement;
+    } else if (typeof localTarget === "string") {
+        targetElem = document.querySelector(localTarget);
+    } else if (typeof localSkeletonElement === "string") {
+        targetElem = document.querySelector(localSkeletonElement);
+    }
 
-    // 2. Build row specs for each field definition
+    if (!targetElem) {
+        targetElem = document.querySelector('[slot="body"]') || document.body;
+    }
+
+    // 2. Locate the body slot container within the target element
+    const bodySlotElem = (targetElem instanceof Node && targetElem.querySelector)
+        ? (targetElem.querySelector('[slot="body"]') || targetElem.querySelector('.form-body') || targetElem)
+        : targetElem;
+
+    // 3. Build row specs for each field definition
     const rowSpecs = localFields.map(field => buildUserRowSpec({ inField: field }));
 
-    // 3. Convert row specs to DOM nodes
+    // 4. Convert row specs to DOM nodes
     const userNodes = buildSpecElement(rowSpecs);
 
-    // 4. Mount user control nodes into the skeleton body slot container
+    // 5. Mount user control nodes into the skeleton body slot container
     if (Array.isArray(userNodes)) {
         userNodes.forEach(node => bodySlotElem.appendChild(node));
     } else if (userNodes instanceof Node) {
         bodySlotElem.appendChild(userNodes);
     }
 
-    return localSkeletonElement;
+    return targetElem;
 };
 
 export default renderUserUI;

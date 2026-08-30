@@ -7,16 +7,17 @@ if (formContainer) {
     // PHASE 1: Render & Mount Structural Skeleton Layout to Page
     // -------------------------------------------------------------
     const skeletonElement = renderSkeleton({});
-    
+
     // Bind Submit Event Hook onto the Skeleton
     bindSkeletonEvents({
         inFormElement: skeletonElement,
         inOnSubmit: ({ inFormData }) => {
-            alert(`Async 2-Phase Form Submitted!\n\n${JSON.stringify(inFormData, null, 2)}`);
+            console.log("Flavor 2 (2-Phase Async Mount) Submitted Data:", inFormData);
+            alert(`Flavor 2 (2-Phase Async Mount) Submitted!\n\n${JSON.stringify(inFormData, null, 2)}`);
         }
     });
 
-    // Mount Skeleton to Page DOM
+    // Mount Skeleton Shell to Page DOM
     formContainer.appendChild(skeletonElement);
 
     // -------------------------------------------------------------
@@ -29,7 +30,7 @@ if (formContainer) {
             { name: "phone", label: "Phone Number", type: "tel", placeholder: "+1 (555) 000-0000" }
         ];
 
-        // Inject User Controls into the live Mounted Skeleton on Page DOM!
+        // Inject User Controls directly into the live Mounted Skeleton on Page DOM!
         renderUserUI({
             inTarget: "#formContainer",
             inFields: dynamicFields
@@ -44,5 +45,5 @@ if (formContainer) {
                 phone: "+91 9876543210"
             }
         });
-    }, 500); // Simulated 500ms API delay
+    }, 800); // Simulated 800ms API fetch delay
 }
