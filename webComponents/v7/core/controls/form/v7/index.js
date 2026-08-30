@@ -1,40 +1,53 @@
-import renderFormUI from "./render/renderFormUI.js";
-import hydrateFormData from "./data/hydrateFormData.js";
-import extractFormData from "./data/extractFormData.js";
-import assembleFormSpec from "./assembly/assembleFormSpec.js";
+import renderSkeleton from "./skeleton/renderSkeleton.js";
+import bindSkeletonEvents from "./skeleton/bindSkeletonEvents.js";
+import renderUserUI from "./userUI/renderUserUI.js";
+import hydrateFormData from "./userUI/hydrateFormData.js";
+import extractFormData from "./userUI/extractFormData.js";
 
 /**
- * Form v6 Pure Orchestrator
- * Connects Assembly, UI Render, Data Hydration, and Event Hooks
+ * Form v7 Layered Architecture Orchestrator
+ *
+ * Layer 1: Skeleton Creation (`renderSkeleton`)
+ * Layer 2: Skeleton Event Hooks (`bindSkeletonEvents`)
+ * Layer 3: User UI & Data Hydration (`renderUserUI`, `hydrateFormData`)
  */
 export const renderForm = ({ inSpec, inFields, inData, inOnSubmit }) => {
     const localSpec = inSpec;
     const localFields = inFields || [];
-    const localData = inData || {};
+    const localData = inData;
     const localOnSubmit = inOnSubmit;
 
-    // Step 1: UI Render & Event Hooking
-    const formElement = renderFormUI({
-        inSpec: localSpec,
-        inFields: localFields,
+    // Layer 1: Build Layout Skeleton DOM Shell (No user controls yet)
+    const skeletonElement = renderSkeleton({ inSpec: localSpec });
+
+    // Layer 2: Hook Skeleton Event Listeners (e.g. submit hook)
+    bindSkeletonEvents({
+        inFormElement: skeletonElement,
         inOnSubmit: localOnSubmit
     });
 
-    // Step 2: Data Hydration
-    if (Object.keys(localData).length > 0) {
+    // Layer 3a: Inject & Render Dynamic User UI Controls into Skeleton body slot
+    renderUserUI({
+        inSkeletonElement: skeletonElement,
+        inFields: localFields
+    });
+
+    // Layer 3b: Hydrate Initial Data Payload (Optional - only if inData is supplied)
+    if (localData && Object.keys(localData).length > 0) {
         hydrateFormData({
-            inFormElement: formElement,
+            inFormElement: skeletonElement,
             inData: localData
         });
     }
 
-    return formElement;
+    return skeletonElement;
 };
 
-// Re-export sub-module layers for fine-grained orchestration
+// Re-export layers for fine-grained step-by-step orchestration
 export {
-    assembleFormSpec,
-    renderFormUI,
+    renderSkeleton,
+    bindSkeletonEvents,
+    renderUserUI,
     hydrateFormData,
     extractFormData
 };

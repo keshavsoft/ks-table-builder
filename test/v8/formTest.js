@@ -3,30 +3,30 @@ import { renderForm } from "../../webComponents/v7/core/controls/form/v7/index.j
 const formContainer = document.getElementById("formContainer");
 
 if (formContainer) {
-    // 1. Dynamic Field Definitions (Assembled into slot="body")
+    // Dynamic User Controls (Layer 3a: User UI)
     const fieldsConfig = [
         { name: "username", label: "Username", type: "text", placeholder: "Enter username" },
         { name: "email", label: "Email Address", type: "email", placeholder: "name@example.com" },
         { name: "phone", label: "Phone Number", type: "tel", placeholder: "+1 (555) 000-0000" }
     ];
 
-    // 2. Data Payload for Hydration Layer
+    // Optional Data Payload (Layer 3b: Data Hydration)
     const initialData = {
         username: "Keshav",
         email: "keshav@example.com",
         phone: "+91 9876543210"
     };
 
-    // 3. Event Callback Hook
+    // Skeleton Event Callback Hook (Layer 2: Skeleton Events)
     const handleSubmit = ({ inFormData }) => {
-        console.log("Form v6 Orchestrated Data:", inFormData);
-        alert(`Form v6 (Orchestration Story) Submitted!\n\n${JSON.stringify(inFormData, null, 2)}`);
+        console.log("Form v7 Skeleton Layered Data:", inFormData);
+        alert(`Form v7 Architecture Submitted!\n\n${JSON.stringify(inFormData, null, 2)}`);
     };
 
-    // Execute Pure Orchestrator
+    // Execute 3-Layer Skeleton Architecture
     const formElement = renderForm({
         inFields: fieldsConfig,
-        inData1: initialData,
+        inData: initialData,
         inOnSubmit: handleSubmit
     });
 
