@@ -4,6 +4,7 @@ import themes from "../../../themes.json" with { type: "json" };
 
 export const buildTableSpec = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
+    console.log("localKsAttributes : ", localKsAttributes);
 
     const themeName = localKsAttributes.theme || "default";
     const themeConfig = themes[themeName]?.table || themes["default"]?.table || {};

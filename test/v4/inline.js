@@ -3,6 +3,7 @@ const inLineDivId = document.getElementById("inLineDivId");
 ksTable1 = document.createElement("ks-table-base");
 
 ksTable1.config = {
+    theme: "dark",
     showSerial: true,
     isSearch: true,
     showHeader: true,
