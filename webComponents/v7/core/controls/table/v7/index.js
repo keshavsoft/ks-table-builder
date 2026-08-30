@@ -1,26 +1,15 @@
-import domElementBuilder from "../../../../domCreation/v2/index.js";
-import buildElements from "./buildElements.js";
-import createTableStore from "./stores/tableStore.js";
+import buildSpecElement from "../../../../domCreation/v2/buildSpecElement.js";
+import buildTableSpec from "./buildTableSpec.js";
 
 export const renderTable = ({ inKsAttributes }) => {
     const localKsAttributes = inKsAttributes || {};
 
-    const tableStore = createTableStore({ inKsAttributes: localKsAttributes });
-
-    const { searchElement, tableElement } = buildElements({
-        inKsAttributes: localKsAttributes,
-        inTableStore: tableStore
+    const tableSpec = buildTableSpec({
+        inKsAttributes: localKsAttributes
     });
 
-    if (!searchElement) return tableElement;
-
-    return domElementBuilder({
-        inSpec: {
-            tagName: "div",
-            attributes: { class: "w-full" },
-            children: [searchElement, tableElement]
-        }
-    });
+    return buildSpecElement(tableSpec);
 };
 
 export default renderTable;
+
