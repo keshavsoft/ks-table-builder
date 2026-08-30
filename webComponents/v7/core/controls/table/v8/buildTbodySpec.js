@@ -1,7 +1,9 @@
 import resolveSpec from "../../../specResolver.js";
 
-export const buildTbodySpec = ({ inKsAttributes }) => {
+export const buildTbodySpec = ({ inKsAttributes, inThemeConfig, inCustomClasses }) => {
     const localKsAttributes = inKsAttributes || {};
+    const localThemeConfig = inThemeConfig || {};
+    const localCustomClasses = inCustomClasses || {};
 
     const rows = Array.isArray(localKsAttributes.rows)
         ? localKsAttributes.rows
@@ -16,6 +18,8 @@ export const buildTbodySpec = ({ inKsAttributes }) => {
         }
     }
 
+    const tdClasses = localCustomClasses.td || localThemeConfig.td || "border border-gray-300 px-4 py-2 text-sm text-gray-800";
+
     const trChildren = rows.map(rowItem => {
         const localRow = rowItem || {};
 
@@ -28,7 +32,7 @@ export const buildTbodySpec = ({ inKsAttributes }) => {
                 return {
                     tagName: "td",
                     attributes: {
-                        class: "border border-gray-300 px-4 py-2 text-sm text-gray-800"
+                        class: tdClasses
                     },
                     children: resolvedChild ? [resolvedChild] : []
                 };
@@ -38,7 +42,7 @@ export const buildTbodySpec = ({ inKsAttributes }) => {
                 tagName: "td",
                 textContent: String(cellConfig ?? ""),
                 attributes: {
-                    class: "border border-gray-300 px-4 py-2 text-sm text-gray-800"
+                    class: tdClasses
                 }
             };
         });
@@ -49,8 +53,11 @@ export const buildTbodySpec = ({ inKsAttributes }) => {
         };
     });
 
+    const tbodyClasses = localCustomClasses.tbody || localThemeConfig.tbody;
+
     return {
         tagName: "tbody",
+        ...(tbodyClasses ? { attributes: { class: tbodyClasses } } : {}),
         children: trChildren
     };
 };

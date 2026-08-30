@@ -1,5 +1,7 @@
-export const buildTheadSpec = ({ inKsAttributes }) => {
+export const buildTheadSpec = ({ inKsAttributes, inThemeConfig, inCustomClasses }) => {
     const localKsAttributes = inKsAttributes || {};
+    const localThemeConfig = inThemeConfig || {};
+    const localCustomClasses = inCustomClasses || {};
 
     let headers = localKsAttributes.headers;
     if (!Array.isArray(headers) || headers.length === 0) {
@@ -14,6 +16,8 @@ export const buildTheadSpec = ({ inKsAttributes }) => {
         }
     }
 
+    const thClasses = localCustomClasses.th || localThemeConfig.th || "border border-gray-300 px-4 py-2 bg-gray-100 text-left text-sm font-semibold text-gray-700";
+
     const thChildren = headers.map(colItem => {
         const headerText = typeof colItem === "object" && colItem !== null
             ? (colItem.label || colItem.key || "")
@@ -23,13 +27,16 @@ export const buildTheadSpec = ({ inKsAttributes }) => {
             tagName: "th",
             textContent: headerText,
             attributes: {
-                class: "border border-gray-300 px-4 py-2 bg-gray-100 text-left text-sm font-semibold text-gray-700"
+                class: thClasses
             }
         };
     });
 
+    const theadClasses = localCustomClasses.thead || localThemeConfig.thead;
+
     return {
         tagName: "thead",
+        ...(theadClasses ? { attributes: { class: theadClasses } } : {}),
         children: [
             {
                 tagName: "tr",
