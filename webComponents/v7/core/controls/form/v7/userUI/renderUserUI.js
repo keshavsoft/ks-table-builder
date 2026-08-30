@@ -12,7 +12,9 @@ export const renderUserUI = ({ inSkeletonElement, inFields }) => {
     if (!localSkeletonElement) return null;
 
     // 1. Locate the body slot container in the skeleton DOM
-    const bodySlotElem = localSkeletonElement.querySelector('[slot="body"]') || localSkeletonElement;
+    const bodySlotElem = localSkeletonElement.querySelector('[slot="body"]')
+        || localSkeletonElement.querySelector('.form-body')
+        || localSkeletonElement;
 
     // 2. Build row specs for each field definition
     const rowSpecs = localFields.map(field => buildUserRowSpec({ inField: field }));
@@ -20,7 +22,7 @@ export const renderUserUI = ({ inSkeletonElement, inFields }) => {
     // 3. Convert row specs to DOM nodes
     const userNodes = buildSpecElement(rowSpecs);
 
-    // 4. Mount user control nodes into the skeleton body slot
+    // 4. Mount user control nodes into the skeleton body slot container
     if (Array.isArray(userNodes)) {
         userNodes.forEach(node => bodySlotElem.appendChild(node));
     } else if (userNodes instanceof Node) {
