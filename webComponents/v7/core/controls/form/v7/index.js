@@ -1,4 +1,5 @@
 import renderSkeleton from "./skeleton/renderSkeleton.js";
+import renderSkeletonHtml from "./skeleton/renderSkeletonHtml.js";
 import bindSkeletonEvents from "./skeleton/bindSkeletonEvents.js";
 import renderUserUI from "./userUI/renderUserUI.js";
 import hydrateFormData from "./userUI/hydrateFormData.js";
@@ -7,7 +8,7 @@ import extractFormData from "./userUI/extractFormData.js";
 /**
  * Form v7 Layered Architecture Orchestrator
  *
- * Layer 1: Skeleton Creation (`renderSkeleton`)
+ * Layer 1: Skeleton Creation (`renderSkeleton` for DOM, `renderSkeletonHtml` for HTML String)
  * Layer 2: Skeleton Event Hooks (`bindSkeletonEvents`)
  * Layer 3: User UI & Data Hydration (`renderUserUI`, `hydrateFormData`)
  */
@@ -46,6 +47,7 @@ export const renderForm = ({ inSpec, inFields, inData, inOnSubmit }) => {
 // Re-export layers for fine-grained step-by-step orchestration
 export {
     renderSkeleton,
+    renderSkeletonHtml,
     bindSkeletonEvents,
     renderUserUI,
     hydrateFormData,
